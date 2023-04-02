@@ -1,0 +1,44 @@
+/* add-on styles */
+.intro-header h1 {
+  font-size: 48px;
+  line-height: 60px;
+  padding-top: 20px;
+}
+.intro-header p.subtitle {
+  font-size: 24px;
+  line-height: 30px;
+  padding-bottom: 20px;
+}
+.main-panel .aui-page-panel-item {
+  padding: 20px 40px 20px 0;
+  height: 100px;
+}
+
+p.statistical-line,
+p.action-line {
+  margin: 0;
+}
+
+.container {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  height:  100px;
+}
+
+span.approved-number {
+  font-weight: bold;
+}
+
+button#approve-button {
+  padding: 5px 10px;
+}

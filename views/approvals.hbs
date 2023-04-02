@@ -1,0 +1,48 @@
+{{!< layout}}
+
+<section class="container">
+  <div class="content">
+    <p class="statistical-line">This page has <span class="approved-number">{{numberApprovedBy}} approval</span></p>
+    <p class="action-line"></p>
+    <button class="approve" id="approve-button">
+      <i class="aui-icon aui-icon-small aui-iconfont-approve"></i> Approve
+    </button>
+  </div>
+</section>
+
+<script type="text/javascript">
+  const currentUsers = JSON.parse('{{{allApprovals}}}');
+  const currentApprovalNumber = {{numberApprovedBy}};
+
+  AP.user.getCurrentUser((user) => {
+    currentUser = user.atlassianAccountId;
+
+    if (currentUsers.includes(currentUser)) {
+      document.querySelector('p.action-line').textContent = "You have already approved this page!";
+      document.querySelector('button#approve-button').disabled = true
+    }
+  });
+
+  document.getElementById('approve-button').addEventListener('click', () => {
+    currentUsers.push(currentUser)
+
+    AP.confluence.getContentProperty('approvals', (property) => {
+      let version = 1
+      if (property?.version?.number) {
+        version = property.version.number + 1;
+      }
+
+      const updatedApprovals = {
+        key: 'approvals',
+        value: { approvedBy: currentUsers },
+        version: { number: version }
+      };
+
+      AP.confluence.setContentProperty(updatedApprovals, () => {
+        document.querySelector('p.action-line').textContent = 'You have approved this page.';
+        document.querySelector('span.approved-number').textContent = `${currentApprovalNumber + 1} approvals`;
+        document.querySelector('button#approve-button').disabled = true
+      });
+    });
+  })
+</script>

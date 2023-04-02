@@ -1,0 +1,48 @@
+{
+    "key": "confluence-byline-addon",
+    "name": "Byline Item for Confluence",
+    "description": "Page Approvals Integration",
+    "vendor": {
+        "name": "Confluence Tutorials",
+        "url": "https://www.atlassian.com/"
+    },
+    "baseUrl": "{{localBaseUrl}}",
+    "links": {
+        "self": "{{localBaseUrl}}/atlassian-connect.json",
+        "homepage": "{{localBaseUrl}}/atlassian-connect.json"
+    },
+    "authentication": {
+        "type": "jwt"
+    },
+    "lifecycle": {
+        "installed": "/installed"
+    },
+    "scopes": [
+        "READ",
+        "WRITE"
+    ],
+    "modules": {
+        "contentBylineItems": [
+            {
+                "context": "addon",
+                "target": {
+                    "type": "inlinedialog"
+                },
+                "tooltip": {
+                    "value": "Approvals"
+                },
+                "icon": {
+                    "url": "/images/approval.svg"
+                },
+                "name": {
+                    "value": "Page Approvals"
+                },
+                "key": "byline-item",
+                "url": "/approvals?contentId={content.id}"
+            }
+        ]
+    },
+    "apiMigrations": {
+        "gdpr": true
+    }
+}
